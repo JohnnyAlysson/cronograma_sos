@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma do Projeto - SOS Auto</title>
+    <style>
+        /* CSS Básico para Estilização com Variáveis para Temas */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        :root {
+            --bg-color: #f4f7f6;
+            --container-bg-color: #ffffff;
+            --text-color: #333333;
+            --primary-color: #FF7A00;
+            --header-text-color: #ffffff;
+            --border-color: #eeeeee;
+            --hover-bg-color: #f9f9f9;
+            --goal-bg-color: #fff8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --icon-color: #FF7A00;
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --container-bg-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --primary-color: #FF7A00;
+            --header-text-color: #ffffff;
+            --border-color: #444444;
+            --hover-bg-color: #2a2a2a;
+            --goal-bg-color: #2c221a;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --icon-color: #FF8A29;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--container-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            overflow: hidden;
+            transition: background-color 0.3s;
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: var(--header-text-color);
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 { margin: 0; font-size: 2em; }
+        .header p { margin: 5px 0 0; opacity: 0.9; }
+
+        /* Botão de Modo Escuro */
+        #theme-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--container-bg-color);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.2em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+        }
+        #theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .timeline { padding: 20px; }
+        .week {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+        .week:last-child { border-bottom: none; }
+
+        .week-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .week-header:hover { background-color: var(--hover-bg-color); }
+        .week-header h2 {
+            margin: 0;
+            font-size: 1.3em;
+            color: var(--primary-color);
+        }
+
+        .toggle-icon {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--icon-color);
+            transition: transform 0.3s ease;
+        }
+
+        .week-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            padding: 0 10px;
+        }
+        .week.active .toggle-icon { transform: rotate(45deg); }
+        
+        .week-goal {
+            font-weight: 500;
+            background-color: var(--goal-bg-color);
+            border-left: 4px solid var(--primary-color);
+            padding: 10px 15px;
+            margin: 10px 0;
+        }
+
+        .task-group h3 {
+            font-size: 1.1em;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 5px;
+            padding-bottom: 3px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .task-group ul { list-style-type: '✓ '; padding-left: 20px; margin: 0; }
+        .task-group li { margin-bottom: 8px; }
+
+        /* --- ESTILOS CORRIGIDOS E MELHORADOS PARA O DIAGRAMA VISUAL --- */
+
+        .visual-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px 20px;
+            background-color: var(--container-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: background-color 0.3s;
+        }
+
+        .visual-container h2 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin-bottom: 40px;
+        }
+        
+        .visual-timeline {
+            position: relative;
+            max-width: 700px; /* Definindo uma largura máxima */
+            margin: 0 auto; /* Centraliza a timeline */
+        }
+
+        .visual-timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%); /* Garante centralização perfeita */
+            border-radius: 3px;
+        }
+
+        .event-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box; /* Garante que padding não afete a largura */
+        }
+        
+        .event-container.left { left: 0; }
+        .event-container.right { left: 50%; }
+
+        .event-container::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            border: medium solid var(--hover-bg-color);
+        }
+        
+        .event-container.left::before {
+            right: 30px;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--hover-bg-color);
+        }
+
+        .event-container.right::before {
+            left: 30px;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--hover-bg-color) transparent transparent;
+        }
+
+        .event-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--primary-color);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+            transition: background-color 0.3s;
+        }
+
+        .event-container.left::after {
+            right: -14px; /* Ajustado para alinhar com a linha central */
+        }
+        .event-container.right::after {
+            left: -14px; /* Ajustado para alinhar com a linha central */
+        }
+
+        .event-content {
+            padding: 15px 20px;
+            background-color: var(--hover-bg-color);
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        
+        .event-content h3 { margin-top: 0; color: var(--primary-color); }
+        .event-content p { margin-bottom: 0; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <button id="theme-toggle" title="Alternar tema">🌙</button>
+            <h1>Cronograma Detalhado do Projeto SOS Auto</h1>
+            <p>Clique em cada semana para expandir os detalhes.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="week">
+                <div class="week-header">
+                    <h2>Semana 1: 07/08 a 15/08 — Planejamento</h2>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="week-details">
+                    <p class="week-goal"><strong>🎯 Meta da Semana:</strong> Ter o escopo do MVP 100% definido e o plano de trabalho visível para todos.</p>
+                    <div class="task-group"><h3>Desenvolvimento (Todos)</h3><ul><li>Participar da definição de escopo e configurar ambientes. Documentar escopo, configurar ferramenta de gestão e criar backlog</li></ul></div>
+                    <div class="task-group"><h3>Organização(Johnny)</h3><ul><li>Documentar escopo, backlog e cronograma </li></ul></div>
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <h2>Semanas 2 e 3: 18/08 a 29/08 — Sprints Iniciais</h2>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="week-details">
+                  <p class="week-goal"><strong>🎯 Meta do Período:</strong> Funcionalidades base em desenvolvimento e prospecção de
+                    prestadores em andamento.</p>
+                  <div class="task-group">
+                    <h3>Desenvolvimento (Todos)</h3>
+                    <ul>
+                      <li>Desenvolver: Cadastro/Login, Mapa com geolocalização</li>`
+                      <li>Desenvolver: Mapa com geolocalização</li>
+                      <li>Desenvolver: Fluxo de solicitação.</li>`
+                      <li>Desenvolver: Chat e atendimento via Chat</li>
+                    </ul>
+                  </div>
+                
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <h2>Semanas 4 e 5: 01/09 a 12/09 — Aceleração</h2>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="week-details">
+                  <p class="week-goal"><strong>🎯 Meta do Período:</strong> Fluxo principal do app funcional </p>
+                
+                  <div class="task-group">
+                    <h3>Desenvolvimento</h3>
+                    <ul>
+                      <li>Desenvolver notificação para prestadores e sistema de avaliação.</li>
+                      <li>Desenvolver sistema de avaliação.</li>
+                    </ul>
+                  </div>
+                
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <h2>Semanas 6 e 7: 15/09 a 26/09 — Testes e Estabilização</h2>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="week-details">
+                     <p class="week-goal"><strong>🎯 Meta do Período:</strong> Congelar features (Feature Freeze) e focar em deixar o MVP estável.</p>
+                     <div class="task-group"><h3>Projeto (Johnny)</h3><ul><li>Coordenar testes internos e definir plano de suporte.</li></ul></div>
+                     <div class="task-group"><h3>Desenvolvimento (Osmar & Clive)</h3><ul><li>Foco total em correção de bugs (Bug Fixing) e otimização.</li></ul></div>
+                     <div class="task-group"><h3>Comercial (Rodrigo)</h3><ul><li>Lançar campanha de pré-lançamento e garantir meta de prestadores.</li></ul></div>
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <h2>Semana 8: 29/09 a 03/10 — Preparação Final</h2>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="week-details">
+                    <p class="week-goal"><strong>🎯 Meta da Semana:</strong> App aprovado nas lojas e tudo pronto para o lançamento.</p>
+                    <div class="task-group"><h3>Projeto (Johnny)</h3><ul><li>Liderar o "Teste Geral" de ponta a ponta.</li></ul></div>
+                     <div class="task-group"><h3>Desenvolvimento (Osmar & Clive)</h3><ul><li>Submeter o app para revisão nas lojas e realizar ajustes finais.</li></ul></div>
+                     <div class="task-group"><h3>Comercial (Rodrigo)</h3><ul><li>Comunicar data de lançamento aos prestadores e preparar comunicação.</li></ul></div>
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <h2>Semana 9: 06/10 a 08/10 — LANÇAMENTO!</h2>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="week-details">
+                    <p class="week-goal"><strong>🎯 Meta da Semana:</strong> Lançar o MVP com sucesso e iniciar a coleta de dados e feedback.</p>
+                    <div class="task-group">
+                        <h3>Toda a Equipe</h3>
+                        <ul>
+                            <li><strong>06/10:</strong> Checagem Final de todos os pontos.</li>
+                            <li><strong>07/10:</strong> Decisão final de "Go/No-Go" para o lançamento.</li>
+                            <li><strong>08/10: DIA DO LANÇAMENTO DO MVP</strong>
+                                <ul>
+                                    <li>Publicar o app e iniciar a comunicação oficial.</li>
+                                    <li>Entrar em modo de suporte e monitoramento ativo.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="visual-container">
+        <h2>Cronograma Visual Gráfico</h2>
+        <div class="visual-timeline">
+            <div class="event-container left">
+                <div class="event-content">
+                    <h3>Semana 1: Planejamento</h3>
+                    <p>Definição do escopo, ferramentas e backlog.</p>
+                </div>
+            </div>
+            <div class="event-container right">
+                <div class="event-content">
+                    <h3>Semanas 2-3: Dev. Inicial</h3>
+                    <p>Criação das funções base e início da prospecção.</p>
+                </div>
+            </div>
+            <div class="event-container left">
+                <div class="event-content">
+                    <h3>Semanas 4-5: Aceleração</h3>
+                    <p>Desenvolvimento do fluxo principal </p>
+                </div>
+            </div>
+            <div class="event-container right">
+                <div class="event-content">
+                    <h3>Semanas 6-7: Testes</h3>
+                    <p>Feature Freeze, correção de bugs e pré-lançamento.</p>
+                </div>
+            </div>
+            <div class="event-container left">
+                <div class="event-content">
+                    <h3>Semana 8: Reta Final</h3>
+                    <p>Testes gerais, submissão do app e alinhamentos.</p>
+                </div>
+            </div>
+            <div class="event-container right">
+                <div class="event-content">
+                    <h3>Semana 9: LANÇAMENTO!</h3>
+                    <p>Go-live do MVP, comunicação e monitoramento.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            
+
+            const weeks = document.querySelectorAll('.week');
+            weeks.forEach(week => {
+                const header = week.querySelector('.week-header');
+                header.addEventListener('click', () => {
+                    const isActive = week.classList.contains('active');
+
+                    weeks.forEach(w => {
+                        w.classList.remove('active');
+                        w.querySelector('.week-details').style.maxHeight = null;
+                        w.querySelector('.toggle-icon').textContent = '+';
+                    });
+                    
+                    if (!isActive) {
+                        week.classList.add('active');
+                        week.querySelector('.toggle-icon').textContent = '−';
+                        const details = week.querySelector('.week-details');
+                        details.style.maxHeight = details.scrollHeight + 'px';
+                    }
+                });
+            });
+
+            
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    body.classList.add('dark-mode');
+                    themeToggle.innerHTML = '☀️'; 
+                } else {
+                    body.classList.remove('dark-mode');
+                    themeToggle.innerHTML = '🌙'; 
+                }
+            };
+
+            
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+
+            
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+            });
+        });
+    </script>
+
+</body>
+</html>
