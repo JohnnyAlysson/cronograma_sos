@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,9 +62,16 @@
             text-align: center;
             position: relative;
         }
-        
-        .header h1 { margin: 0; font-size: 2em; }
-        .header p { margin: 5px 0 0; opacity: 0.9; }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .header p {
+            margin: 5px 0 0;
+            opacity: 0.9;
+        }
 
         /* Botão de Modo Escuro */
         #theme-toggle {
@@ -83,17 +91,24 @@
             align-items: center;
             transition: background-color 0.3s, color 0.3s, transform 0.2s;
         }
+
         #theme-toggle:hover {
             transform: scale(1.1);
         }
 
-        .timeline { padding: 20px; }
+        .timeline {
+            padding: 20px;
+        }
+
         .week {
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 10px;
             padding-bottom: 10px;
         }
-        .week:last-child { border-bottom: none; }
+
+        .week:last-child {
+            border-bottom: none;
+        }
 
         .week-header {
             display: flex;
@@ -104,7 +119,11 @@
             border-radius: 5px;
             transition: background-color 0.3s;
         }
-        .week-header:hover { background-color: var(--hover-bg-color); }
+
+        .week-header:hover {
+            background-color: var(--hover-bg-color);
+        }
+
         .week-header h2 {
             margin: 0;
             font-size: 1.3em;
@@ -124,8 +143,11 @@
             transition: max-height 0.5s ease-out;
             padding: 0 10px;
         }
-        .week.active .toggle-icon { transform: rotate(45deg); }
-        
+
+        .week.active .toggle-icon {
+            transform: rotate(45deg);
+        }
+
         .week-goal {
             font-weight: 500;
             background-color: var(--goal-bg-color);
@@ -142,8 +164,16 @@
             padding-bottom: 3px;
             border-bottom: 2px solid var(--border-color);
         }
-        .task-group ul { list-style-type: '✓ '; padding-left: 20px; margin: 0; }
-        .task-group li { margin-bottom: 8px; }
+
+        .task-group ul {
+            list-style-type: '✓ ';
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .task-group li {
+            margin-bottom: 8px;
+        }
 
         /* --- ESTILOS CORRIGIDOS E MELHORADOS PARA O DIAGRAMA VISUAL --- */
 
@@ -163,11 +193,13 @@
             font-size: 1.8em;
             margin-bottom: 40px;
         }
-        
+
         .visual-timeline {
             position: relative;
-            max-width: 700px; /* Definindo uma largura máxima */
-            margin: 0 auto; /* Centraliza a timeline */
+            max-width: 700px;
+            /* Definindo uma largura máxima */
+            margin: 0 auto;
+            /* Centraliza a timeline */
         }
 
         .visual-timeline::after {
@@ -178,7 +210,8 @@
             top: 0;
             bottom: 0;
             left: 50%;
-            transform: translateX(-50%); /* Garante centralização perfeita */
+            transform: translateX(-50%);
+            /* Garante centralização perfeita */
             border-radius: 3px;
         }
 
@@ -187,11 +220,17 @@
             position: relative;
             background-color: inherit;
             width: 50%;
-            box-sizing: border-box; /* Garante que padding não afete a largura */
+            box-sizing: border-box;
+            /* Garante que padding não afete a largura */
         }
-        
-        .event-container.left { left: 0; }
-        .event-container.right { left: 50%; }
+
+        .event-container.left {
+            left: 0;
+        }
+
+        .event-container.right {
+            left: 50%;
+        }
 
         .event-container::before {
             content: " ";
@@ -202,7 +241,7 @@
             z-index: 1;
             border: medium solid var(--hover-bg-color);
         }
-        
+
         .event-container.left::before {
             right: 30px;
             border-width: 10px 0 10px 10px;
@@ -229,10 +268,13 @@
         }
 
         .event-container.left::after {
-            right: -14px; /* Ajustado para alinhar com a linha central */
+            right: -14px;
+            /* Ajustado para alinhar com a linha central */
         }
+
         .event-container.right::after {
-            left: -14px; /* Ajustado para alinhar com a linha central */
+            left: -14px;
+            /* Ajustado para alinhar com a linha central */
         }
 
         .event-content {
@@ -243,11 +285,19 @@
             border: 1px solid var(--border-color);
             transition: background-color 0.3s, border-color 0.3s;
         }
-        
-        .event-content h3 { margin-top: 0; color: var(--primary-color); }
-        .event-content p { margin-bottom: 0; font-size: 0.9em; }
+
+        .event-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .event-content p {
+            margin-bottom: 0;
+            font-size: 0.9em;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -264,30 +314,50 @@
                     <span class="toggle-icon">+</span>
                 </div>
                 <div class="week-details">
-                    <p class="week-goal"><strong>🎯 Meta da Semana:</strong> Ter o escopo do MVP 100% definido e o plano de trabalho visível para todos.</p>
-                    <div class="task-group"><h3>Desenvolvimento (Todos)</h3><ul><li>Participar da definição de escopo e configurar ambientes. Documentar escopo, configurar ferramenta de gestão e criar backlog</li></ul></div>
-                    <div class="task-group"><h3>Organização(Johnny)</h3><ul><li>Documentar escopo, backlog e cronograma </li></ul></div>
+                    <p class="week-goal"><strong>🎯 Meta da Semana:</strong> Ter o escopo do MVP 100% definido e o plano
+                        de trabalho visível para todos.</p>
+                    <div class="task-group">
+                        <h3>Desenvolvimento (Todos)</h3>
+                        <ul>
+                            <li>Participar da definição de escopo e configurar ambientes. Documentar escopo, configurar
+                                ferramenta de gestão e criar backlog</li>
+                            <li>Sistema de pagamentos (Clive ou Rodrigo)</li>
+                            <li>Sistema de Chamado(Clive)</li>
+                            <li>Sistema de Notificação(Johnny)</li>
+                        </ul>
+                    </div>
+                    <div class="task-group">
+                        <h3>Organização(Johnny)</h3>
+                        <ul>
+                            <li>Documentar escopo, backlog e cronograma </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-
             <div class="week">
                 <div class="week-header">
                     <h2>Semanas 2 e 3: 18/08 a 29/08 — Sprints Iniciais</h2>
                     <span class="toggle-icon">+</span>
                 </div>
                 <div class="week-details">
-                  <p class="week-goal"><strong>🎯 Meta do Período:</strong> Funcionalidades base em desenvolvimento e prospecção de
-                    prestadores em andamento.</p>
-                  <div class="task-group">
-                    <h3>Desenvolvimento (Todos)</h3>
-                    <ul>
-                      <li>Desenvolver: Cadastro/Login, Mapa com geolocalização</li>`
-                      <li>Desenvolver: Mapa com geolocalização</li>
-                      <li>Desenvolver: Fluxo de solicitação.</li>`
-                      <li>Desenvolver: Chat e atendimento via Chat</li>
-                    </ul>
-                  </div>
-                
+                    <p class="week-goal"><strong>🎯 Meta do Período:</strong> Funcionalidades essenciais do app construídas e prontas para teste interno.
+                    </p>
+                    <div class="task-group">
+                        <h3>Desenvolvimento (Todos)</h3>
+                        <ul>
+                            <li>Desenvolver: Cadastro/Login Integração</li>
+                            <li>Desenvolver: Mapa com geolocalização Integração</li>
+                            <li>Desenvolver: Fluxo de solicitação Integração</li>
+                            <li>Outros que não foram finalizados na semana anterior</li>
+                        </ul>
+                        <h3>QA(Rodrigo, Johnny)</h3>
+                        <ul>
+                            <li>Testar funcionalidades já entregues</li>
+                            <li>Azeitar integrações</li>
+                            <li>Reportar bugs</li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
 
@@ -297,42 +367,68 @@
                     <span class="toggle-icon">+</span>
                 </div>
                 <div class="week-details">
-                  <p class="week-goal"><strong>🎯 Meta do Período:</strong> Fluxo principal do app funcional </p>
-                
-                  <div class="task-group">
-                    <h3>Desenvolvimento</h3>
-                    <ul>
-                      <li>Desenvolver notificação para prestadores e sistema de avaliação.</li>
-                      <li>Desenvolver sistema de avaliação.</li>
-                    </ul>
-                  </div>
-                
+                    <p class="week-goal"><strong>🎯 Meta do Período:</strong> Conclusão do Desenvolvimento e Preparação </p>
+
+                    <div class="task-group">
+                        <h3>Desenvolvimento</h3>
+                        <ul>
+                            <li>Finalizar as funcionalidades restantes do MVP: [] e integração de ponta a ponta.</li>
+                        </ul>
+                        <h3>Gestão e QA </h3>
+                        <ul>
+                            <li>Preparar a documentação para a publicação nas lojas de aplicativos</li>
+                            <li>Continuar os testes intensivos e começar a preparar os materiais para a fase de
+                                prospecção: criar a apresentação comercial, definir o script de abordagem e montar uma
+                                lista inicial de potenciais parceiros</li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
 
             <div class="week">
                 <div class="week-header">
-                    <h2>Semanas 6 e 7: 15/09 a 26/09 — Testes e Estabilização</h2>
+                    <h2>Semanas 6 e 7: 15/09 a 26/09 —  Início da Força-Tarefa Comercial e Testes Beta</h2>
                     <span class="toggle-icon">+</span>
                 </div>
                 <div class="week-details">
-                     <p class="week-goal"><strong>🎯 Meta do Período:</strong> Congelar features (Feature Freeze) e focar em deixar o MVP estável.</p>
-                     <div class="task-group"><h3>Projeto (Johnny)</h3><ul><li>Coordenar testes internos e definir plano de suporte.</li></ul></div>
-                     <div class="task-group"><h3>Desenvolvimento (Osmar & Clive)</h3><ul><li>Foco total em correção de bugs (Bug Fixing) e otimização.</li></ul></div>
-                     <div class="task-group"><h3>Comercial (Rodrigo)</h3><ul><li>Lançar campanha de pré-lançamento e garantir meta de prestadores.</li></ul></div>
+                    <p class="week-goal"><strong>🎯 Meta do Período:</strong>  Iniciar a prospecção ativa com o app funcional em mãos e corrigir os bugs mais críticos.</p>
+                    <div class="task-group">
+                        <h3>Comercial e Gestão</h3>
+                        <ul>
+                            <li> Força-tarefa de prospecção ativa. Começar a ligar e a visitar os prestadores de serviço para apresentá-los ao app e credenciá-los.</li>
+                        </ul>
+                    </div>
+                    <div class="task-group">
+                        <h3>Desenvolvimento</h3>
+                        <ul>
+                            <li><Strong>Feature freeze:</Strong> Foco total em correção de bugs, teste (Bug Fixing) e otimização.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
             <div class="week">
                 <div class="week-header">
-                    <h2>Semana 8: 29/09 a 03/10 — Preparação Final</h2>
+                    <h2>Semana 8: 29/09 a 03/10 — Prospecção Intensiva e Preparação Final</h2>
                     <span class="toggle-icon">+</span>
                 </div>
                 <div class="week-details">
-                    <p class="week-goal"><strong>🎯 Meta da Semana:</strong> App aprovado nas lojas e tudo pronto para o lançamento.</p>
-                    <div class="task-group"><h3>Projeto (Johnny)</h3><ul><li>Liderar o "Teste Geral" de ponta a ponta.</li></ul></div>
-                     <div class="task-group"><h3>Desenvolvimento (Osmar & Clive)</h3><ul><li>Submeter o app para revisão nas lojas e realizar ajustes finais.</li></ul></div>
-                     <div class="task-group"><h3>Comercial (Rodrigo)</h3><ul><li>Comunicar data de lançamento aos prestadores e preparar comunicação.</li></ul></div>
+                    <p class="week-goal"><strong>🎯 Meta da Semana:</strong> Atingir a meta de prestadores credenciados e ter o app estável e publicado </p>
+                    <div class="task-group">
+                        <h3>Comercial e Marketing</h3>
+                        <ul>
+                            <li>Credenciar novos prestadores, visando ter uma base sólida para o lançamento.</li>
+                            <li>Iniciar o marketing de pré-lançamento nas redes sociais para gerar expectativa no público final (motoristas).</li>
+                        </ul>
+                    </div>
+                    <div class="task-group">
+                        <h3>Desenvolvimento</h3>
+                        <ul>
+                            <li>Foco em otimização de performance e correções finais.</li>
+                            <li>Submeter o aplicativo para revisão na Google Play e Apple Store, para garantir que esteja aprovado até a data de lançamento.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -342,7 +438,8 @@
                     <span class="toggle-icon">+</span>
                 </div>
                 <div class="week-details">
-                    <p class="week-goal"><strong>🎯 Meta da Semana:</strong> Lançar o MVP com sucesso e iniciar a coleta de dados e feedback.</p>
+                    <p class="week-goal"><strong>🎯 Meta da Semana:</strong> Lançar o MVP com sucesso e iniciar a coleta
+                        de dados e feedback.</p>
                     <div class="task-group">
                         <h3>Toda a Equipe</h3>
                         <ul>
@@ -352,6 +449,7 @@
                                 <ul>
                                     <li>Publicar o app e iniciar a comunicação oficial.</li>
                                     <li>Entrar em modo de suporte e monitoramento ativo.</li>
+                                    <li>Toda a equipe em modo de suporte ativo, monitorando os primeiros chamados e coletando feedback para o próximo ciclo de melhorias.</li>
                                 </ul>
                             </li>
                         </ul>
@@ -360,7 +458,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="visual-container">
         <h2>Cronograma Visual Gráfico</h2>
         <div class="visual-timeline">
@@ -373,7 +471,7 @@
             <div class="event-container right">
                 <div class="event-content">
                     <h3>Semanas 2-3: Dev. Inicial</h3>
-                    <p>Criação das funções base e início da prospecção.</p>
+                    <p>Criação das funções base</p>
                 </div>
             </div>
             <div class="event-container left">
@@ -407,7 +505,7 @@
 
 
         document.addEventListener('DOMContentLoaded', function () {
-            
+
 
             const weeks = document.querySelectorAll('.week');
             weeks.forEach(week => {
@@ -420,7 +518,7 @@
                         w.querySelector('.week-details').style.maxHeight = null;
                         w.querySelector('.toggle-icon').textContent = '+';
                     });
-                    
+
                     if (!isActive) {
                         week.classList.add('active');
                         week.querySelector('.toggle-icon').textContent = '−';
@@ -430,30 +528,30 @@
                 });
             });
 
-            
+
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
 
-            
+
             const applyTheme = (theme) => {
                 if (theme === 'dark') {
                     body.classList.add('dark-mode');
-                    themeToggle.innerHTML = '☀️'; 
+                    themeToggle.innerHTML = '☀️';
                 } else {
                     body.classList.remove('dark-mode');
-                    themeToggle.innerHTML = '🌙'; 
+                    themeToggle.innerHTML = '🌙';
                 }
             };
 
-            
+
             const savedTheme = localStorage.getItem('theme') || 'light';
             applyTheme(savedTheme);
 
-            
+
             themeToggle.addEventListener('click', () => {
                 const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
                 const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                
+
                 localStorage.setItem('theme', newTheme);
                 applyTheme(newTheme);
             });
@@ -461,4 +559,5 @@
     </script>
 
 </body>
+
 </html>
